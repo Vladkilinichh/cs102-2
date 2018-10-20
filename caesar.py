@@ -1,46 +1,30 @@
-def encrypt_caesar(plaintext, shift = 3):
-	'''
-	Encrypts plaintext using a Caesar cipher.
-	>>> encrypt_caesar("PYTHON")
-	'SBWKRQ'
-	>>> encrypt_caesar("python")
-	'sbwkrq'
-	>>> encrypt_caesar("Python3.6")
-	'Sbwkrq3.6'
-	>>> encrypt_caesar("")
-	''
-	'''
-	cipher = ''
-	for char in plaintext:
-		if 'a' <= char <= 'z':
-			new_charcode = (ord(char) % ord('a') + shift) % 26 + ord('a')  # for upper case
-		elif 'A' <= char <= 'Z':
-			new_charcode = (ord(char) % ord('A') + shift) % 26 + ord('A')  # for lower case
-		else:
-			new_charcode = ord(char)  # for other symbols
-		cipher += chr(new_charcode)
-	return cipher
+# -*- coding: utf-8 -*-
+def encrypt_caesar(plaintext):
+    new_data = []
+    for char in plaintext:
+        if(ord(char ) >= 97 and ord(char) <= 122): 
+            new_char = chr((ord(char) - 97 + 3) % 26 + 97)  # для маленькой
+        elif( ord(char) >= 65 and ord(char) <= 90 ):
+            new_char = chr((ord(char) - 65 + 3) % 26 + 65) # для большой
+        else:
+            new_char = char
+        new_data.append(new_char)
+    return "".join(new_data)
+print(encrypt_caesar(input('Введите текст на англе')))
 
 
-def decrypt_caesar(cipher, shift = 3):
-	"""
-	Decrypts a ciphertext using a Caesar cipher.
-	>>> decrypt_caesar("SBWKRQ")
-	'PYTHON'
-	>>> decrypt_caesar("sbwkrq")
-	'python'
-	>>> decrypt_caesar("Sbwkrq3.6")
-	'Python3.6'
-	>>> decrypt_caesar("")
-	''
-	"""
-	plaintext = ''
-	for char in cipher:
-		if 'a' <= char <= 'z':
-			new_charcode = (ord(char) % ord('a') - shift) % 26 + ord('a')  # for upper case
-		elif 'A' <= char <= 'Z':
-			new_charcode = (ord(char) % ord('A') - shift) % 26 + ord('A')  # for lower case
-		else:
-			new_charcode = ord(char)  # for other symbols
-		plaintext += chr(new_charcode)
-	return plaintext
+
+
+
+def encrypt_caesar(plaintext):
+    new_data = []
+    for char in plaintext:
+        if(ord(char ) >= 97 and ord(char) <= 122): 
+            new_char = chr((ord(char) - 97 - 3) % 26 + 97)  # для маленькой
+        elif( ord(char) >= 65 and ord(char) <= 90 ):
+            new_char = chr((ord(char) - 65 - 3) % 26 + 65) # для большой
+        else:
+            new_char = char
+        new_data.append(new_char)
+    return "".join(new_data)
+print(encrypt_caesar(input('Введите текст на англе')))
