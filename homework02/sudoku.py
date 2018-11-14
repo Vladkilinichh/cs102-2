@@ -1,7 +1,6 @@
 from typing import Any, Union, List
 
 
-
 def read_sudoku(puzzle1):
     """ Прочитать Судоку из указанного файла """
     digits = [c for c in open(puzzle1).read() if c in '123456789.']
