@@ -147,6 +147,39 @@ def check_solution(solution: list) -> bool:
                     return False
     return True
 
+
+def generate_sudoku(N: int) -> list:
+    """ Генерация судоку заполненного на N элементов
+    >>> grid = generate_sudoku(40)
+    >>> sum(1 for row in grid for e in row if e == '.')
+    41
+    >>> solution = solve(grid)
+    >>> check_solution(solution)
+    True
+    >>> grid = generate_sudoku(1000)
+    >>> sum(1 for row in grid for e in row if e == '.')
+    0
+    >>> solution = solve(grid)
+    >>> check_solution(solution)
+    True
+    >>> grid = generate_sudoku(0)
+    >>> sum(1 for row in grid for e in row if e == '.')
+    81
+    >>> solution = solve(grid)
+    >>> check_solution(solution)
+    True
+    """
+    grid: list = solve([['.'] * 9 for _ in range(9)])
+    S = 81 - min(81, max(0, S))
+    while S:
+        row = random.randint(0, 8)
+        col = random.randint(0, 8)
+        if grid[row][col] != '.':
+            grid[row][col] = '.'
+            S -= 1
+    return grid
+
+
 if __name__ == '__main__':
     for fname in ['puzzle1.txt', 'puzzle2.txt', 'puzzle3.txt']:
         grid = read_sudoku(fname)
