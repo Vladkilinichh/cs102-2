@@ -1,4 +1,5 @@
 from typing import Any, Union, List, Tuple
+import random
 
 
 def read_sudoku(puzzle1: str) -> List[List[str]]:
