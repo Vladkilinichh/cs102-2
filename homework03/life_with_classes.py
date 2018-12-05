@@ -166,12 +166,12 @@ class CellList:
                 col = 0
                 for pos in line:
                     if pos in '01':
-                        new_grid[row].append(Cell(row, col, bool(int(pos))))
+                        grid[row].append(Cell(row, col, bool(int(pos))))
                         col += 1
-                line = f.readline()
+                line = file.readline()
                 row += 1
-        clist = cls(len(new_grid), len(new_grid[0]))
-        clist.clist = new_grid
+        clist = cls(len(grid), len(grid[0]))
+        clist.clist = grid
         return clist
 
 
