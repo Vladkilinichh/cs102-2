@@ -121,26 +121,23 @@ class CellList:
             neighbours.append(self.clist[row][col - 1])
         if row > 0 and col < (self.ncols - 1):
             neighbours.append(self.clist[row - 1][col + 1])
-
         return neighbours
 
     def update(self) -> list:
         new_clist = deepcopy(self)
-        for row in range(self.nrows):
-            for col in range(self.ncols):
-                neighbours = new_clist.get_neighbours(
-                    new_clist.clist[row][col])
-                sum = 0
-                for i in neighbours:
-                    if i.is_alive() == 1:
-                        sum += 1
-                if new_clist.clist[row][col].is_alive() == 0 and sum == 3:
-                    self.clist[row][col] = Cell(row, col, True)
-                elif new_clist.clist[row][col].is_alive() == 1 and (
-                        sum == 2 or sum == 3):
-                    self.clist[row][col] = Cell(row, col, True)
-                else:
-                    self.clist[row][col] = Cell(row, col, False)
+        for cell in range:
+            neighbours = new_clist.get_neighbours(cell)
+            cells = 0
+            for i in neighbours:
+                if i.is_alive() == 1:
+                    cells += 1
+            if new_clist.clist[row][col].is_alive() == 0 and cells == 3:
+                self.clist[row][col] = Cell(row, col, True)
+            elif new_clist.clist[row][col].is_alive() == 1 and (
+                    cells == 2 or cells == 3):
+                self.clist[row][col] = Cell(row, col, True)
+            else:
+                self.clist[row][col] = Cell(row, col, False)
         return self
 
     def __iter__(self):

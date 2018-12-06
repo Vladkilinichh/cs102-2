@@ -78,23 +78,20 @@ class GameOfLife:
         """
         x, y = 0, 0
         m, n = 0, 0
-        c = 0
-        a = self.cell_size - 1
         for row in range(len(clist)):
             for col in range(len(clist[row])):
-                c += 1
                 if clist[row][col] == 1:
                     pygame.draw.rect(self.screen, pygame.Color('LightSkyBlue3'),
-                                     (x + 1, y + 1, a, a))
-                    x += a + 1
+                                     (x + 1, y + 1, self.cell_size - 1, self.cell_size - 1))
+                    x += self.cell_size
                     m += 1
                 else:
                     pygame.draw.rect(self.screen, pygame.Color('white'),
-                                     (x + 1, y + 1, a, a))
-                    x += a + 1
+                                     (x + 1, y + 1, self.cell_size - 1, self.cell_size - 1))
+                    x += self.cell_size
                     n += 1
             x = 0
-            y += a + 1
+            y += self.cell_size
 
     def get_neighbours(self, cell) -> list:
         """ Вернуть список соседей для указанной ячейки
@@ -122,18 +119,19 @@ class GameOfLife:
             new_clist.append([])
             for col in range(len(cell_list[row])):
                 neighbours = self.get_neighbours((row, col))
-                sum = 0
+                cells = 0
                 for i in neighbours:
                     if i == 1:
-                        sum += 1
-                if cell_list[row][col] == 0 and sum == 3:
+                        cells += 1
+                if cell_list[row][col] == 0 and cells == 3:
                     new_clist[row].append(1)
-                elif cell_list[row][col] == 1 and (sum == 2 or sum == 3):
+                elif cell_list[row][col] == 1 and (cells == 2 or cells == 3):
                     new_clist[row].append(1)
                 else:
                     new_clist[row].append(0)
         self.clist = new_clist
         return self.clist
+
 
 if __name__ == '__main__':
     game = GameOfLife(1000, 800, 25)
