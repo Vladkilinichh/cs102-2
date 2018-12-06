@@ -102,12 +102,26 @@ class CellList:
 
     def get_neighbours(self, cell) -> list:
         neighbours = []
-        ri = cell.row
-        ci = cell.col
-        for i in range(ri - 1, ri + 2):
-            for j in range(ci - 1, ci + 2):
-                if (i, j) != cell and i >= 0 and i < len(self.clist) and j >= 0 and j < len(self.clist[0]):
-                    neighbours.append(self.clist[i][j])
+        row = cell.row
+        col = cell.col
+
+        if col < (self.ncols - 1):
+            neighbours.append(self.clist[row][col + 1])
+        if row > 0:
+            neighbours.append(self.clist[row - 1][col])
+        if row < (self.nrows - 1):
+            neighbours.append(self.clist[row + 1][col])
+        if row < (self.nrows - 1) and col > 0:
+            neighbours.append(self.clist[row + 1][col - 1])
+        if row < (self.nrows - 1) and col < (self.ncols - 1):
+            neighbours.append(self.clist[row + 1][col + 1])
+        if row > 0 and col > 0:
+            neighbours.append(self.clist[row - 1][col - 1])
+        if col > 0:
+            neighbours.append(self.clist[row][col - 1])
+        if row > 0 and col < (self.ncols - 1):
+            neighbours.append(self.clist[row - 1][col + 1])
+
         return neighbours
 
     def update(self) -> list:
