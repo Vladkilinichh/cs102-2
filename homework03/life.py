@@ -62,14 +62,12 @@ class GameOfLife:
         каждая клетка равновероятно может быть живой (1) или мертвой (0).
         :return: Список клеток, представленный в виде матрицы
         """
-        self.clist = []
-        if randomize:
-            for i in range(self.cell_height):
-                self.clist.append([1 if random.randint(1, 10) % 2 == 0 else 0
-                    for j in range((self.cell_width))])
-        else:
-            for i in range(self.cell_height):
-                self.clist.append([0 for j in range((self.cell_width))])
+        self.clist = [[0 for i in range(self.cell_width)] for j in range(self.cell_height)]
+        clist = [[0 for i in range(self.cell_width)] for j in range(self.cell_height)]
+        for i in range(self.cell_height):
+            for j in range(self.cell_width):
+                if randomize:
+                    self.clist[i][j] = random.randint(0, 1)
         return self.clist
 
     def draw_cell_list(self, clist) -> None:
